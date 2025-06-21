@@ -22,7 +22,7 @@ Features
   - The differnece between public and occupational safety limits
   - How to build useful tool susing Python and Graphing libraries
 
-Why this exists?
+~Why this exists?
 
 I am currently in 10th grade as of 6/21/25, studying Nuclear Engineering for college on my own,
 I wanted to make something that actually works and helps me understand exposure limits and safety.
@@ -30,12 +30,14 @@ This is part of a bigger notebook I'm building.
 
 ----
 
-Future Ideas
+## Future Ideas
 
 - Add decay formula visualizations ( WIP!! )
 - Make a rad. shielding calc.
 - Turn this into a simple web app
 - Add preset scenarios, IE. Chernobyl clean up, CT scans, Fukushima, Etc.
+
+--- 
 
 Requirements
 
@@ -47,15 +49,16 @@ Install the graph lib:
 ```bash
 pip install matpotlib
 ```
+----
 
--- Example use cases 
+-- ## Example use cases 
 ~ How long can I stay in a 0.5 μSv/h room before going over 1 mSv per year?
 ~ Who gets more radiation; someone working 6 hrs a day at low exposure, or 2 hours/day at high exposure?
 ~ How dangerous is a one time 10-hour exposure at 10 μSv/h?
 
 ----
 
-WHO MADE THIS?
+## WHO MADE THIS?
 Created by **Jorgen Eduard Olesen**,  ![Nuclear Engineering Learner](https://img.shields.io/badge/Nuclear%20Engineering-Self--Taught-green?style=flat-square&logo=react) ![Student Badge](https://img.shields.io/badge/Student-10th%20Grade-blue?style=flat-square&logo=BookStack)
 
 a 10th grade student from Denmark with a self-taught passion for nuclear engineering, Python programming,
