@@ -50,11 +50,10 @@ Install the graph lib:
 pip install matpotlib
 ```
 ----
-
--- ## Example use cases 
-~ How long can I stay in a 0.5 μSv/h room before going over 1 mSv per year?
-~ Who gets more radiation; someone working 6 hrs a day at low exposure, or 2 hours/day at high exposure?
-~ How dangerous is a one time 10-hour exposure at 10 μSv/h?
+ ## Example use cases 
+- How long can I stay in a 0.5 μSv/h room before going over 1 mSv per year?
+- Who gets more radiation; someone working 6 hrs a day at low exposure, or 2 hours/day at high exposure?
+-  How dangerous is a one time 10-hour exposure at 10 μSv/h?
 
 ----
 
