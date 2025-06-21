@@ -12,8 +12,6 @@ import math
 # ----- Page Setup -----
 st.set_page_config(page_title="The Nuclear Toolbox", layout="centered")
 st.title("The Nuclear Toolbox")
-st.markdown("""
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT) """)
 st.caption("Created by Jorgen Eduard Olesen · MIT License")
 
 # ----- Menu -----
