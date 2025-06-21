@@ -10,8 +10,8 @@ import math
  
 
 # ----- Page Setup -----
-st.set_page_config(page_title="Nuclear Toolkit", layout="centered")
-st.title("☢️ Nuclear Engineering Toolkit")
+st.set_page_config(page_title="The Nuclear Toolbox", layout="centered")
+st.title("The Nuclear Toolbox")
 st.caption("Created by Jorgen Eduard Olesen · MIT License")
 
 # ----- Menu -----
@@ -27,7 +27,7 @@ menu = st.sidebar.radio("🔍 Select Module", [
 # ----- Home -----
 if menu == "🏠 Home":
     st.header("📘 Welcome")
-    st.markdown("""
+    st.markdown("[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)""
 This is a beginner-level toolkit designed for exploring core topics in nuclear engineering:
 - **Radioactive decay**
 - **Radiation exposure and cancer risk**
