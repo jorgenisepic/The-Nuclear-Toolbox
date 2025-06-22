@@ -7,7 +7,8 @@ import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
 import math
- 
+import graphviz
+from shielding.shielding_simulator import calculate_shielded_dose, shielding_factors
 
 # ----- Page Setup -----
 st.set_page_config(page_title="Nuclear Toolkit", layout="centered")
@@ -33,7 +34,7 @@ This is a beginner-level toolkit designed for exploring core topics in nuclear e
 - **Radiation exposure and cancer risk**
 - **Dose classification**
 - **Unit conversion**
-- **Radiation type reference**
+- **Radiation type reference ( CURRENTLY OUT FOR BUG FIXING )**
 
 Built entirely with Python and Streamlit for educational use.
 """)
