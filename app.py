@@ -9,6 +9,10 @@ import matplotlib.pyplot as plt
 import math
 import graphviz
 from shielding.shielding_simulator import calculate_shielded_dose, shielding_factors
+from isotope_database.isotope_compare import compare_isotopes
+from isotope_database.isotope_search import isotope_searcher
+
+
 
 # ----- Page Setup -----
 st.set_page_config(page_title="The Nuclear Toolbox", layout="centered")
@@ -24,7 +28,9 @@ menu = st.sidebar.radio("🔍 Select Module", [
     "📊 Radiation Dose Chart",
     "🔁 Radiation Unit Converter",
     "📋 Radiation Types",
-    "🛡️ Shielding Simulation"
+    "🛡️ Shielding Simulation",    
+    "🔍 Isotope Search"
+
 ])
 
 # ----- Home -----
@@ -286,3 +292,14 @@ elif menu == "🛡️ Shielding Simulation":
         g.edge("B", "C", label="Transmitted")
 
         st.graphviz_chart(g) 
+
+        #--- ISOTOPE SECTION
+
+elif menu == "🔍 Isotope Search":
+    isotope_searcher()
+
+
+        #----- isotope compare
+
+elif menu == "⚖️ Compare Isotopes":
+    compare_isotopes()
