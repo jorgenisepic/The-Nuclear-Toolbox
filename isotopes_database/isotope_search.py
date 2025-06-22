@@ -1,5 +1,5 @@
 import streamlit as st
-from isotope_database import isotope_data
+from isotopes_database.isotope_database import isotope_data
 
 def isotope_searcher():
     st.header("🔍 Isotope Database Search")

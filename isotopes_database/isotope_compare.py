@@ -1,5 +1,5 @@
 import streamlit as st
-from isotope_database import isotope_data
+from isotopes_database.isotope_database import isotope_data
 import pandas as pd
 
 def compare_isotopes():
