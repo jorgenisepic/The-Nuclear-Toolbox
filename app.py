@@ -29,7 +29,8 @@ menu = st.sidebar.radio("🔍 Select Module", [
     "🔁 Radiation Unit Converter",
     "📋 Radiation Types",
     "🛡️ Shielding Simulation",    
-    "🔍 Isotope Search"
+    "🔍 Isotope Search",
+    "⚖️ Compare Isotopes"
 
 ])
 
