@@ -245,3 +245,39 @@ elif menu == "📋 Radiation Types":
         for key, val in props.items():
             st.markdown(f"**{key}:** {val}")
         st.markdown("---")
+
+
+
+        #----SHIELDING----
+elif menu == "Shielding Simulator":
+    st.title("🛡️ Shielding Simulator")
+    st.markdown("Estimate how much radiation passes through different shielding materials.")
+
+    dose_input = st.number_input("Initial Radiation Dose (μSv)", min_value=0.0, step=0.1)
+    material_choice = st.selectbox("Shielding Material", list(shielding_factors.keys()))
+
+    if st.button("Calculate"):
+        remaining, blocked = calculate_shielded_dose(dose_input, material_choice)
+
+        st.success(f"🛑 Blocked: {blocked * 100:.1f}%")
+        st.info(f"☢️ Remaining Dose: {remaining:,.2f} μSv")
+
+        st.bar_chart({
+            "Dose (μSv)": {
+                "Initial": dose_input,
+                "Remaining": remaining
+            }
+        })
+
+        # 📊 Graphviz visual
+        st.markdown("### 📉 Shielding Path")
+        g = graphviz.Digraph()
+
+        g.node("A", f"{dose_input:.2f} μSv", shape="circle", color="orange", style="filled")
+        g.node("B", material_choice, shape="box", color="lightblue", style="filled")
+        g.node("C", f"{remaining:,.2f} μSv", shape="circle", color="green", style="filled")
+
+        g.edge("A", "B", label="Shielding")
+        g.edge("B", "C", label="Transmitted")
+
+        st.graphviz_chart(g) 
