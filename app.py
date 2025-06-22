@@ -11,7 +11,7 @@ import graphviz
 from shielding.shielding_simulator import calculate_shielded_dose, shielding_factors
 from isotopes_database.isotope_compare import compare_isotopes
 from isotopes_database.isotope_search import isotope_searcher
-
+from decay_math.decay_chain_viewer import show_decay_chain
 
 
 # ----- Page Setup -----
@@ -30,7 +30,8 @@ menu = st.sidebar.radio("🔍 Select Module", [
     "📋 Radiation Types",
     "🛡️ Shielding Simulation",    
     "🔍 Isotope Search",
-    "⚖️ Compare Isotopes"
+    "⚖️ Compare Isotopes",
+    "Decay Chain Viewer"
 
 ])
 
@@ -306,3 +307,10 @@ elif menu == "🔍 Isotope Search":
 
 elif menu == "⚖️ Compare Isotopes":
     compare_isotopes()
+
+
+    #--- Decay chain viewer
+
+elif menu == "Decay Chain Viewer":
+     show_decay_chain()
+   
