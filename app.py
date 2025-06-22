@@ -14,6 +14,7 @@ from shielding.shielding_simulator import calculate_shielded_dose, shielding_fac
 st.set_page_config(page_title="The Nuclear Toolbox", layout="centered")
 st.title("The Nuclear Toolbox")
 st.caption("Created by Jorgen Eduard Olesen · MIT License")
+st.markdown("")
 
 # ----- Menu -----
 menu = st.sidebar.radio("🔍 Select Module", [
@@ -134,7 +135,10 @@ elif menu == "📟 Exposure Calculator":
 # ----- Radiation Dose Comparison Chart -----
 elif menu == "📊 Radiation Dose Chart":
     st.header("📊 Radiation Dose Comparison Chart")
-
+    st.markdown("""
+This chart helps visualize the scale of different radiation doses — from everyday background exposure to serious nuclear incidents.  
+All doses are in **millisieverts (mSv)** and are based on public safety, medical use, and known accident data.
+""")
     dose_data = {
         "Dental X-ray": 0.005,
         "NY-Tokyo Flight": 0.2,
