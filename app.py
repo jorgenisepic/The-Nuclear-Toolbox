@@ -250,7 +250,7 @@ elif menu == "📋 Radiation Types":
 
 
         #----SHIELDING----
-elif menu == "Shielding Simulator":
+elif menu == "🛡️ Shielding Simulator":
     st.header("🛡️ Shielding Simulator")
     st.markdown("Estimate how much radiation passes through different shielding materials.")
 
