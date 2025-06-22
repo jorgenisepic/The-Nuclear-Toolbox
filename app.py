@@ -23,7 +23,7 @@ menu = st.sidebar.radio("🔍 Select Module", [
     "📊 Radiation Dose Chart",
     "🔁 Radiation Unit Converter",
     "📋 Radiation Types",
-    "🛡️ Shielding Simulation "
+    "🛡️ Shielding Simulation"
 ])
 
 # ----- Home -----
@@ -251,7 +251,7 @@ elif menu == "📋 Radiation Types":
 
         #----SHIELDING----
 elif menu == "Shielding Simulator":
-    st.title("🛡️ Shielding Simulator")
+    st.header("🛡️ Shielding Simulator")
     st.markdown("Estimate how much radiation passes through different shielding materials.")
 
     dose_input = st.number_input("Initial Radiation Dose (μSv)", min_value=0.0, step=0.1)
