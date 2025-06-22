@@ -14,7 +14,7 @@ from shielding.shielding_simulator import calculate_shielded_dose, shielding_fac
 st.set_page_config(page_title="The Nuclear Toolbox", layout="centered")
 st.title("The Nuclear Toolbox")
 st.caption("Created by Jorgen Eduard Olesen · MIT License")
-st.markdown("")
+st.markdown("![Status](https://img.shields.io/badge/Status-In_Development-yellow)")
 
 # ----- Menu -----
 menu = st.sidebar.radio("🔍 Select Module", [
