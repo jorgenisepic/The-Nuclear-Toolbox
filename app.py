@@ -22,7 +22,8 @@ menu = st.sidebar.radio("🔍 Select Module", [
     "📟 Exposure Calculator",
     "📊 Radiation Dose Chart",
     "🔁 Radiation Unit Converter",
-    "📋 Radiation Types"
+    "📋 Radiation Types",
+    "🛡️ Shielding Simulation "
 ])
 
 # ----- Home -----
