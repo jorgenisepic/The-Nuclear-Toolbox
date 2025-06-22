@@ -31,7 +31,7 @@ menu = st.sidebar.radio("🔍 Select Module", [
     "🛡️ Shielding Simulation",    
     "🔍 Isotope Search",
     "⚖️ Compare Isotopes",
-    "Decay Chain Viewer"
+    "🔗 Decay Chain Viewer"
 
 ])
 
@@ -39,16 +39,26 @@ menu = st.sidebar.radio("🔍 Select Module", [
 if menu == "🏠 Home":
     st.header("📘 Welcome")
     st.markdown("""
-This is a beginner-level toolkit designed for exploring core topics in nuclear engineering:
-- **Radioactive decay**
-- **Radiation exposure and cancer risk**
-- **Dose classification**
-- **Unit conversion**
-- **Radiation type reference **
-- **Isotope Search & Comparison **
-- ** Shielding Simulation **
+This is a beginner-level toolkit designed for exploring core topics in nuclear engineering and radiation science:
 
-Built entirely with Python and Streamlit for educational use.
+### 🔬 Key Features:
+- **Radioactive decay** — visualize and calculate half-lives and remaining isotopes.
+- **Radiation exposure and cancer risk** — estimate dose impact and biological effect.
+- **Dose classification** — understand dose categories from safe to hazardous.
+- **Unit conversion** — convert between Sieverts, rem, Gray, and more.
+- **Radiation type reference** — learn properties of alpha, beta, gamma, and neutron radiation.
+- **Isotope Search & Comparison** — search nuclear isotopes and compare their properties.
+- **Shielding Simulation** — model radiation shielding through various materials.
+
+---
+
+### 📌 About
+This application is developed as part of **The Nuclear Toolbox**, a student-led initiative aimed at making nuclear science more accessible.
+
+Built entirely with **Python** and **Streamlit**, this app is optimized for both learners and educators. Future versions aim to support researchers with deeper analysis tools and database integration.
+
+📦 **Version:** 1.1.3  
+Feel free to explore, experiment, and contribute to the project!
 """)
 
 # ----- Radioactive Decay -----
@@ -299,7 +309,7 @@ elif menu == "🛡️ Shielding Simulation":
 
         #--- ISOTOPE SECTION
 
-elif menu == "🔍 Isotope Search":
+elif menu == "🔗 Decay Chain Viewer":
     isotope_searcher()
 
 
@@ -311,6 +321,13 @@ elif menu == "⚖️ Compare Isotopes":
 
     #--- Decay chain viewer
 
-elif menu == "Decay Chain Viewer":
-     show_decay_chain()
+    st.header("🔗 Decay Chain Viewer")
+    st.markdown("""
+This interactive chart displays the full radioactive decay path for select isotopes like **U-238**, **U-235**, and **Th-232**.
+
+You can trace how each isotope undergoes alpha (α) and beta (β⁻) decays until it stabilizes.
+
+🔴 Red = Alpha decay  
+🔵 Blue = Beta decay  
+""")
    
