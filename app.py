@@ -11,6 +11,7 @@ import graphviz
 from shielding.shielding_simulator import calculate_shielded_dose, shielding_factors
 from isotopes_database.isotope_compare import compare_isotopes
 from isotopes_database.isotope_search import isotope_searcher
+from decay_math.decay_chain_viewer import  display_decay_chain
 
 # ----- Page Setup -----
 st.set_page_config(page_title="The Nuclear Toolbox", layout="centered")
@@ -307,7 +308,7 @@ elif menu == "🛡️ Shielding Simulation":
 
         #--- ISOTOPE SECTION
 
-elif menu == "🔗 Decay Chain Viewer":
+elif menu == "🔍 Isotope Search":
     isotope_searcher()
 
 
@@ -319,6 +320,7 @@ elif menu == "⚖️ Compare Isotopes":
 
     #--- Decay chain viewer
 
+elif menu == "🔗 Decay Chain Viewer":
     st.header("🔗 Decay Chain Viewer")
     st.markdown("""
 This interactive chart displays the full radioactive decay path for select isotopes like **U-238**, **U-235**, and **Th-232**.
@@ -328,4 +330,6 @@ You can trace how each isotope undergoes alpha (α) and beta (β⁻) decays unti
 🔴 Red = Alpha decay  
 🔵 Blue = Beta decay  
 """)
-   
+
+    isotope_selected = st.selectbox("Select Isotope", ["Uranium-238", "Thorium-232", "Uranium-235"])
+    display_decay_chain(isotope_selected)
