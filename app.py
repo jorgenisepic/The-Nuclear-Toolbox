@@ -32,7 +32,8 @@ menu = st.sidebar.radio("🔍 Select Module", [
     "🔧 Reactor Core Designer",   
     "🔍 Isotope Search",
     "⚖️ Compare Isotopes",
-    "⚛️ Criticality Calculator"
+    "⚛️ Criticality Calculator",
+    "🧩 Custom Equation Builder"
 
 ])
 
