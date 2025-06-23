@@ -381,5 +381,52 @@ elif menu == "⚛️ Criticality Calculator":
 #----reactor designer
 
 elif menu == "🧱 Reactor Core Designer":
-    from reactor_diagram.reactor_designer import reactor_designer_tool
-    reactor_designer_tool()
+ 
+
+  st.subheader("🧩 Advanced Reactor Core Designer")
+  st.markdown("""
+This module simulates a **nuclear reactor core layout** with variable fuel enrichment zones and control rod positions.
+- Outer zones are lower enriched.
+- Inner zones are higher enriched for optimal burnup.
+- Black squares represent **control rods**.
+""")
+
+grid_size = st.slider("Core Grid Size (NxN)", 5, 25, 15)
+layers = grid_size // 2
+base_enrichment = st.slider("Base Fuel Enrichment (%)", 1.0, 5.0, 3.0, 0.1)
+gradient = st.slider("Enrichment Gradient", 0.1, 2.0, 0.5, 0.1)
+
+insert_control_rods = st.checkbox("Insert Control Rods")
+rod_spacing = st.slider("Rod Spacing", 2, 5, 3) if insert_control_rods else None
+
+core = np.zeros((grid_size, grid_size))
+for i in range(grid_size):
+    for j in range(grid_size):
+        distance = max(abs(i - layers), abs(j - layers))
+        enrichment = base_enrichment - (gradient * distance)
+        core[i, j] = max(enrichment, 0.1)
+
+if insert_control_rods:
+    for i in range(0, grid_size, rod_spacing):
+        for j in range(0, grid_size, rod_spacing):
+            core[i, j] = -1
+
+fig, ax = plt.subplots(figsize=(8, 8))
+cmap = plt.cm.viridis
+cmap.set_under("black")
+
+c = ax.imshow(core, cmap=cmap, vmin=0.01)
+plt.colorbar(c, ax=ax, label="Fuel Enrichment (%)")
+
+for i in range(grid_size):
+    for j in range(grid_size):
+        val = core[i, j]
+        if val == -1:
+            ax.text(j, i, "CR", ha='center', va='center', color='white', fontsize=7)
+        else:
+            ax.text(j, i, f"{val:.1f}", ha='center', va='center', fontsize=6)
+
+ax.set_title("Reactor Core Layout")
+ax.set_xticks([])
+ax.set_yticks([])
+st.pyplot(fig)
