@@ -472,7 +472,7 @@ elif menu == "🔧 Reactor Core Designer":
 
 #---- Equation
 
-    elif menu == "🧩 Custom Equation Builder":
+elif menu == "🧩 Custom Equation Builder":
     st.subheader("🧩 Custom Equation Builder")
 
     st.markdown("""
