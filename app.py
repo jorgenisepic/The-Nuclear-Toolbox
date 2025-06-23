@@ -19,7 +19,8 @@ from yaml.loader import SafeLoader
 
 # ----- Auth. -----
 
-hashed_passwords = stauth.Hasher(['123', 'adminpass']).generate()
+
+hashed_passwords = stauth.Hasher().generate(['123', 'adminpass'])
 
 credentials = {
     "usernames": {
