@@ -534,7 +534,7 @@ elif menu == "🧩 Custom Equation Builder":
 
         # TOU
 
-        elif menu == "📄 Terms of Use":
+elif menu == "📄 Terms of Use":
     st.subheader("📄 Terms of Use")
     
     st.markdown("""
