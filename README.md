@@ -1,7 +1,6 @@
 # The Nuclear Toolbox ![The Nuclear Toolbox](https://img.shields.io/badge/The_Nuclear_Toolbox-Built_with_Passion-red?style=for-the-badge&logo=nucleo) ![Streamlit](https://img.shields.io/badge/Streamlit-App-orange?logo=streamlit) 
 
 **Created by Jorgen Eduard Olesen**
-SMA Pangudi Luhur Jakarta, Class of 28' 
 
 ---
 
