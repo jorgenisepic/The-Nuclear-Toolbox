@@ -9,10 +9,64 @@ import matplotlib.pyplot as plt
 import math
 import graphviz
 import sympy as sp
+import streamlit_authenticator as stauth
+import yaml
 from shielding.shielding_simulator import calculate_shielded_dose, shielding_factors
 from isotopes_database.isotope_compare import compare_isotopes
 from isotopes_database.isotope_search import isotope_searcher
+from yaml.loader import SafeLoader
 
+
+# ----- Auth. -----
+
+credentials = {
+    "usernames": {
+        "jorgen": {
+            "name": "Jorgen Eduard",
+            "password": stauth.Hasher(['123']).generate()[0],
+        },
+        "admin": {
+            "name": "Admin",
+            "password": stauth.Hasher(['adminpass']).generate()[0],
+        }
+    }
+}
+
+
+authenticator = stauth.Authenticate(
+    credentials,
+    "nuclear_toolbox_cookie",
+    "nuclear_toolbox_signature_key",
+    cookie_expiry_days=30
+)
+
+name, authentication_status, username = authenticator.login("Login", "main")
+
+if authentication_status == False:
+    st.error("Invalid username or password.")
+elif authentication_status == None:
+    st.warning("Please enter your username and password.")
+elif authentication_status:
+    authenticator.logout("Logout", "sidebar")
+    
+    st.sidebar.success(f"Logged in as {name}")
+    
+    # place your app’s main menu here, under the auth block
+menu = st.sidebar.radio("🔍 Select Module", [
+    "🏠 Home",
+    "📉 Radioactive Decay",
+    "📟 Exposure Calculator",
+    "📊 Radiation Dose Chart",
+    "🔁 Radiation Unit Converter",
+    "📋 Radiation Types",
+    "🛡️ Shielding Simulation", 
+    "🔧 Reactor Core Designer",   
+    "🔍 Isotope Search",
+    "⚖️ Compare Isotopes",
+    "⚛️ Criticality Calculator",
+    "🧩 Custom Equation Builder"
+
+])
 
 # ----- Page Setup -----
 st.set_page_config(page_title="The Nuclear Toolbox", layout="centered")
