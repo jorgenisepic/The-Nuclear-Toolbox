@@ -27,7 +27,8 @@ menu = st.sidebar.radio("🔍 Select Module", [
     "📊 Radiation Dose Chart",
     "🔁 Radiation Unit Converter",
     "📋 Radiation Types",
-    "🛡️ Shielding Simulation",    
+    "🛡️ Shielding Simulation", 
+    "🧱 Reactor Core Designer",   
     "🔍 Isotope Search",
     "⚖️ Compare Isotopes",
     "⚛️ Criticality Calculator"
@@ -375,3 +376,10 @@ elif menu == "⚛️ Criticality Calculator":
 
     except ZeroDivisionError:
         st.error("Invalid input: division by zero.")
+
+
+#----reactor designer
+
+elif menu == "🧱 Reactor Core Designer":
+    from reactor_diagram.reactor_designer import reactor_designer_tool
+    reactor_designer_tool()
