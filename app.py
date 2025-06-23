@@ -470,6 +470,7 @@ elif menu == "🔧 Reactor Core Designer":
     - ☢️ k-effective: `{k_eff}`
     """)
 
+#---- Equation
 
     elif menu == "🧩 Custom Equation Builder":
     st.subheader("🧩 Custom Equation Builder")
