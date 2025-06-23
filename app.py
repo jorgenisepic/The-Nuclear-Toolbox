@@ -17,53 +17,6 @@ from isotopes_database.isotope_search import isotope_searcher
 from yaml.loader import SafeLoader
 
 
-# ----- Auth. -----
-# ----- Setup usernames and hashed passwords -----
-names = ['Jorgen Eduard', 'Admin']
-usernames = ['jorgen', 'admin']
-passwords = ['123', 'adminpass']  # plaintext, will be hashed below
-
-# Generate hashed passwords
-hashed_passwords = stauth.Hasher(passwords).generate()
-
-# Credentials dictionary
-credentials = {
-    "usernames": {
-        usernames[0]: {
-            "name": names[0],
-            "password": hashed_passwords[0]
-        },
-        usernames[1]: {
-            "name": names[1],
-            "password": hashed_passwords[1]
-        }
-    }
-}
-
-# ----- Authenticator Setup -----
-authenticator = stauth.Authenticate(
-    credentials,
-    "nuclear_toolbox_cookie",  # Cookie name
-    "abcdef123",               # Signature key (can be any string)
-    cookie_expiry_days=1
-)
-
-# Login widget
-name, auth_status, username = authenticator.login("Login", "main")
-
-# ----- Logic After Login -----
-if auth_status is False:
-    st.error("Username or password is incorrect.")
-elif auth_status is None:
-    st.warning("Please enter your username and password.")
-elif auth_status:
-    authenticator.logout("Logout", "sidebar")
-    st.sidebar.success(f"Welcome, {name}!")
-
-    # Your main app code goes here
-    st.title("🔬 The Nuclear Toolbox")
-    st.write("You are logged in and can now access all features.")
-
 
 
 # ----- Page Setup -----
@@ -92,6 +45,7 @@ menu = st.sidebar.radio("🔍 Select Module", [
 # ----- Home -----
 if menu == "🏠 Home":
     st.header("📘 Welcome")
+    st.markdown("[📄 View Terms of Use](#📄-terms-of-use)")
     st.markdown("""
 This is a beginner-level toolkit designed for exploring core topics in nuclear engineering and radiation science:
 
@@ -576,3 +530,42 @@ elif menu == "🧩 Custom Equation Builder":
 
     except Exception as e:
         st.error(f"Error: {e}")
+
+
+        # TOU
+
+        elif menu == "📄 Terms of Use":
+    st.subheader("📄 Terms of Use")
+    
+    st.markdown("""
+    **Last updated:** June 24, 2025
+
+    By using **The Nuclear Toolbox**, you agree to the following terms:
+
+    ### 1. Purpose
+    This platform is provided for **educational, academic, and non-commercial research use**. It is **not** certified for real-world engineering design or nuclear safety decision-making.
+
+    ### 2. Disclaimer
+    - The app is provided **"as is"** without warranty of any kind.
+    - We do not guarantee the accuracy, completeness, or validity of any simulation result, isotope data, or criticality calculation.
+    - You assume full responsibility for any use of the data or results.
+
+    ### 3. Acceptable Use
+    You agree **not** to:
+    - Use the platform for military, destructive, or harmful applications.
+    - Reverse engineer or redistribute the app without permission.
+    - Submit malicious code, perform exploits, or disrupt service for others.
+
+    ### 4. Data & Privacy
+    - No personal data is collected unless explicitly submitted via feedback forms or login (if applicable).
+    - Anonymous usage data may be collected to improve functionality.
+
+    ### 5. Intellectual Property
+    All original content, graphics, and code are the property of **The Nuclear Toolbox** unless otherwise credited. Licensed under the **MIT License**.
+
+    ### 6. Changes
+    We may update these Terms at any time. Continued use of the app indicates acceptance of the updated Terms.
+
+    ### 7. Contact
+    Contact us at: `thenucleartoolbox@protonmail.com`
+    """)
