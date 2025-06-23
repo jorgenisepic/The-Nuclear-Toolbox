@@ -57,7 +57,7 @@ This application is developed as part of **The Nuclear Toolbox**, a student-led 
 
 Built entirely with **Python** and **Streamlit**, this app is optimized for both learners and educators. Future versions aim to support researchers with deeper analysis tools and database integration.
 
-📦 **Version:** 1.1.3  
+📦 **Version:** 1.1.4 Test
 Feel free to explore, experiment, and contribute to the project!
 """)
 
