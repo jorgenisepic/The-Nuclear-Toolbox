@@ -19,15 +19,17 @@ from yaml.loader import SafeLoader
 
 # ----- Auth. -----
 
+hashed_passwords = stauth.Hasher(['123', 'adminpass']).generate()
+
 credentials = {
     "usernames": {
         "jorgen": {
             "name": "Jorgen Eduard",
-            "password": stauth.Hasher().generate(['123'])[0],
+            "password": hashed_passwords[0],
         },
         "admin": {
             "name": "Admin",
-            "password": stauth.Hasher().generate(['adminpass'])[0],
+            "password": hashed_passwords[1],
         }
     }
 }
