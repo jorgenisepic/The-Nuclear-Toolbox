@@ -23,11 +23,11 @@ credentials = {
     "usernames": {
         "jorgen": {
             "name": "Jorgen Eduard",
-            "password": stauth.Hasher(['123']).generate()[0],
+            "password": stauth.Hasher().generate(['123'])[0],
         },
         "admin": {
             "name": "Admin",
-            "password": stauth.Hasher(['adminpass']).generate()[0],
+            "password": stauth.Hasher().generate(['adminpass'])[0],
         }
     }
 }
