@@ -8,6 +8,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 import graphviz
+import sympy as sp
 from shielding.shielding_simulator import calculate_shielded_dose, shielding_factors
 from isotopes_database.isotope_compare import compare_isotopes
 from isotopes_database.isotope_search import isotope_searcher
@@ -468,3 +469,56 @@ elif menu == "🔧 Reactor Core Designer":
     - 🧪 Average Fuel Enrichment: `{np.mean(core[core != -1]):.2f}%`
     - ☢️ k-effective: `{k_eff}`
     """)
+
+
+    elif menu == "🧩 Custom Equation Builder":
+    st.subheader("🧩 Custom Equation Builder")
+
+    st.markdown("""
+    Enter a symbolic nuclear formula using variables like `N0`, `λ`, and `t`.
+
+    Example:  
+    ```
+    N(t) = N0 * exp(-λ * t)
+    ```
+    """)
+
+    import sympy as sp
+    import numpy as np
+    import matplotlib.pyplot as plt
+
+    # Input field for user-defined equation
+    user_input = st.text_input("Equation (use Python syntax):", "N(t) = N0 * exp(-λ * t)")
+
+    # Define allowed symbols
+    t = sp.Symbol('t')
+    N0 = sp.Symbol('N0')
+    lam = sp.Symbol('λ')
+    allowed_symbols = {'t': t, 'N0': N0, 'λ': lam, 'exp': sp.exp}
+
+    try:
+        lhs, rhs = user_input.split('=')
+        lhs = lhs.strip()
+        rhs = rhs.strip()
+        expr = sp.sympify(rhs, locals=allowed_symbols)
+
+        # Parameter inputs
+        N0_val = st.number_input("Initial Quantity (N0)", value=100.0)
+        lam_val = st.number_input("Decay Constant (λ)", value=0.1)
+        t_vals = np.linspace(0, 50, 300)
+
+        # Evaluate expression
+        f = sp.lambdify((t, N0, lam), expr, modules=['numpy'])
+        y_vals = f(t_vals, N0_val, lam_val)
+
+        # Plotting
+        fig, ax = plt.subplots()
+        ax.plot(t_vals, y_vals, label=sp.latex(expr))
+        ax.set_xlabel("Time (t)")
+        ax.set_ylabel("Result")
+        ax.set_title("Custom Equation Output")
+        ax.legend()
+        st.pyplot(fig)
+
+    except Exception as e:
+        st.error(f"Error: {e}")
