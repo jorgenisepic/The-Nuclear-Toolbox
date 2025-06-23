@@ -4,3 +4,4 @@ numpy
 graphviz
 pandas
 sympy
+streamlit-authenticator
