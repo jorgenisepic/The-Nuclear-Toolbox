@@ -381,42 +381,70 @@ elif menu == "⚛️ Criticality Calculator":
 #----reactor designer
 
 elif menu == "🧱 Reactor Core Designer":
- 
+    
 
-  st.subheader("🧩 Advanced Reactor Core Designer")
-  st.markdown("""
-This module simulates a **nuclear reactor core layout** with variable fuel enrichment zones and control rod positions.
-- Outer zones are lower enriched.
-- Inner zones are higher enriched for optimal burnup.
-- Black squares represent **control rods**.
+ st.subheader("🔧 Advanced Reactor Core Designer")
+
+ st.markdown("""
+Design a **pressurized water reactor (PWR)** core layout with fuel enrichment zones, control rod placement, and thermal power output.
+
+### 💡 Physics:
+Each fuel cell contributes power based on enrichment:
+- **Thermal Power (MWt)** estimated via:  
+  $$ P_{cell} = 10 \\times E \\times k_{eff} $$
+  Where:
+  - $E$ = enrichment (%)
+  - $k_{eff}$ = multiplication factor (default: 1.05)
+- Total thermal power is the sum of all active fuel cell contributions.
+
+**Control Rods** fully suppress power in their cell.
 """)
 
-grid_size = st.slider("Core Grid Size (NxN)", 5, 25, 15)
-layers = grid_size // 2
-base_enrichment = st.slider("Base Fuel Enrichment (%)", 1.0, 5.0, 3.0, 0.1)
-gradient = st.slider("Enrichment Gradient", 0.1, 2.0, 0.5, 0.1)
+# Inputs
+grid_size       = st.slider("Grid Size (NxN)", 5, 25, 15)
+base_enrichment = st.slider("Base Enrichment (%)", 1.5, 5.0, 3.0, 0.1)
+gradient        = st.slider("Enrichment Gradient", 0.1, 1.5, 0.4, 0.1)
+k_eff           = st.slider("k-effective", 0.8, 1.2, 1.05, 0.01)
 
-insert_control_rods = st.checkbox("Insert Control Rods")
-rod_spacing = st.slider("Rod Spacing", 2, 5, 3) if insert_control_rods else None
+insert_rods     = st.checkbox("Insert Control Rods")
+rod_spacing     = st.slider("Rod Spacing", 2, 6, 3) if insert_rods else None
 
-core = np.zeros((grid_size, grid_size))
+# Reactor Grid Setup
+core       = np.zeros((grid_size, grid_size))
+power_map  = np.zeros((grid_size, grid_size))
+center     = grid_size // 2
+
 for i in range(grid_size):
     for j in range(grid_size):
-        distance = max(abs(i - layers), abs(j - layers))
-        enrichment = base_enrichment - (gradient * distance)
-        core[i, j] = max(enrichment, 0.1)
+        dist         = max(abs(i - center), abs(j - center))
+        enrichment   = base_enrichment - gradient * dist
+        enrichment   = max(enrichment, 0.1)
+        core[i, j]   = enrichment
 
-if insert_control_rods:
+if insert_rods:
     for i in range(0, grid_size, rod_spacing):
         for j in range(0, grid_size, rod_spacing):
-            core[i, j] = -1
+            core[i, j] = -1  # Control rod position
 
+# Power estimation
+total_power = 0
+
+for i in range(grid_size):
+    for j in range(grid_size):
+        if core[i, j] == -1:
+            power_map[i, j] = 0
+        else:
+            power = 10 * core[i, j] * k_eff  # MWt per cell
+            power_map[i, j] = power
+            total_power += power
+
+# Plotting
 fig, ax = plt.subplots(figsize=(8, 8))
-cmap = plt.cm.viridis
+cmap = plt.cm.inferno
 cmap.set_under("black")
 
-c = ax.imshow(core, cmap=cmap, vmin=0.01)
-plt.colorbar(c, ax=ax, label="Fuel Enrichment (%)")
+im = ax.imshow(power_map, cmap=cmap, vmin=0.01)
+plt.colorbar(im, ax=ax, label="Thermal Power (MWt)")
 
 for i in range(grid_size):
     for j in range(grid_size):
@@ -424,9 +452,19 @@ for i in range(grid_size):
         if val == -1:
             ax.text(j, i, "CR", ha='center', va='center', color='white', fontsize=7)
         else:
-            ax.text(j, i, f"{val:.1f}", ha='center', va='center', fontsize=6)
+            ax.text(j, i, f"{val:.1f}%", ha='center', va='center', fontsize=6)
 
-ax.set_title("Reactor Core Layout")
+ax.set_title("Core Fuel Layout & Power Distribution")
 ax.set_xticks([])
 ax.set_yticks([])
+
 st.pyplot(fig)
+
+# Summary
+st.markdown(f"""
+## 🔋 Reactor Summary
+- 🔥 Estimated Total Thermal Power: `{total_power:.2f} MWt`
+- 🧪 Average Fuel Enrichment: `{np.mean(core[core != -1]):.2f}%`
+- ☢️ k-effective: `{k_eff}`
+""")
+
