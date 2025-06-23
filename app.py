@@ -18,58 +18,53 @@ from yaml.loader import SafeLoader
 
 
 # ----- Auth. -----
+# ----- Setup usernames and hashed passwords -----
+names = ['Jorgen Eduard', 'Admin']
+usernames = ['jorgen', 'admin']
+passwords = ['123', 'adminpass']  # plaintext, will be hashed below
 
+# Generate hashed passwords
+hashed_passwords = stauth.Hasher(passwords).generate()
 
-hashed_passwords = stauth.Hasher().generate(['123', 'adminpass'])
-
+# Credentials dictionary
 credentials = {
     "usernames": {
-        "jorgen": {
-            "name": "Jorgen Eduard",
-            "password": hashed_passwords[0],
+        usernames[0]: {
+            "name": names[0],
+            "password": hashed_passwords[0]
         },
-        "admin": {
-            "name": "Admin",
-            "password": hashed_passwords[1],
+        usernames[1]: {
+            "name": names[1],
+            "password": hashed_passwords[1]
         }
     }
 }
 
-
+# ----- Authenticator Setup -----
 authenticator = stauth.Authenticate(
     credentials,
-    "nuclear_toolbox_cookie",
-    "nuclear_toolbox_signature_key",
-    cookie_expiry_days=30
+    "nuclear_toolbox_cookie",  # Cookie name
+    "abcdef123",               # Signature key (can be any string)
+    cookie_expiry_days=1
 )
 
-name, authentication_status, username = authenticator.login("Login", "main")
+# Login widget
+name, auth_status, username = authenticator.login("Login", "main")
 
-if authentication_status == False:
-    st.error("Invalid username or password.")
-elif authentication_status == None:
+# ----- Logic After Login -----
+if auth_status is False:
+    st.error("Username or password is incorrect.")
+elif auth_status is None:
     st.warning("Please enter your username and password.")
-elif authentication_status:
+elif auth_status:
     authenticator.logout("Logout", "sidebar")
-    
-    st.sidebar.success(f"Logged in as {name}")
-    
-    # place your app’s main menu here, under the auth block
-menu = st.sidebar.radio("🔍 Select Module", [
-    "🏠 Home",
-    "📉 Radioactive Decay",
-    "📟 Exposure Calculator",
-    "📊 Radiation Dose Chart",
-    "🔁 Radiation Unit Converter",
-    "📋 Radiation Types",
-    "🛡️ Shielding Simulation", 
-    "🔧 Reactor Core Designer",   
-    "🔍 Isotope Search",
-    "⚖️ Compare Isotopes",
-    "⚛️ Criticality Calculator",
-    "🧩 Custom Equation Builder"
+    st.sidebar.success(f"Welcome, {name}!")
 
-])
+    # Your main app code goes here
+    st.title("🔬 The Nuclear Toolbox")
+    st.write("You are logged in and can now access all features.")
+
+
 
 # ----- Page Setup -----
 st.set_page_config(page_title="The Nuclear Toolbox", layout="centered")
