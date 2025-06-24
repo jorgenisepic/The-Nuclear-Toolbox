@@ -12,6 +12,7 @@ from shielding.shielding_simulator import calculate_shielded_dose, shielding_fac
 from isotopes_database.isotope_compare import compare_isotopes
 from isotopes_database.isotope_search import isotope_searcher
 
+
 # ----- Page Setup -----
 st.set_page_config(page_title="The Nuclear Toolbox", layout="centered")
 st.title("The Nuclear Toolbox")
@@ -319,8 +320,5 @@ elif menu == "⚖️ Compare Isotopes":
 
     #--- crit. calc.
 
-elif menu == "⚛️ Criticality Calculator":
-    import decay_math.criticality_calculator
-
-
-  
+elif menu == "Decay Chain Viewer":
+    from decay_math import decay_chain_viewer
