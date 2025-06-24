@@ -320,5 +320,5 @@ elif menu == "⚖️ Compare Isotopes":
 
     #--- crit. calc.
 
-elif menu == "Decay Chain Viewer":
-    from decay_math import decay_chain_viewer
+elif menu == "⚛️ Criticality Calculator":
+    import decay_math.criticality_calculator
