@@ -318,13 +318,13 @@ elif menu == "⚖️ Compare Isotopes":
     compare_isotopes()
 
 
-    #--- crit. calc.
+   
+   
+    
+#calc
 
 elif menu == "⚛️ Criticality Calculator":
-  import streamlit as st
-import numpy as np
-import math
-import graphviz
+
 
 st.subheader("⚛️ Criticality Calculator")
 
