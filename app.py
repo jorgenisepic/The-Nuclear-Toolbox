@@ -326,9 +326,9 @@ elif menu == "⚖️ Compare Isotopes":
 elif menu == "⚛️ Criticality Calculator":
 
 
-st.subheader("⚛️ Criticality Calculator")
+    st.subheader("⚛️ Criticality Calculator")
 
-st.markdown("""
+    st.markdown("""
 This tool estimates the **effective neutron multiplication factor** ($k_{eff}$) in a nuclear reactor core using:
 
 $$ k_{eff} = \\frac{\\nu \\cdot \\Sigma_f}{\\Sigma_f + \\Sigma_a} $$
