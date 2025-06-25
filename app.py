@@ -324,8 +324,6 @@ elif menu == "⚖️ Compare Isotopes":
 #calc
 
 elif menu == "⚛️ Criticality Calculator":
-
-
     st.subheader("⚛️ Criticality Calculator")
 
     st.markdown("""
